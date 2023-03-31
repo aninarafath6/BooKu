@@ -36,14 +36,7 @@ class HomeView extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              "Recommended",
-                              style: GoogleFonts.merriweather(
-                                color: AppColors.textColor,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 18.sp,
-                              ),
-                            ),
+                            const RecommendedHeader(),
                             const Spacer(),
                             TextButton(
                               style: ButtonStyle(
@@ -76,10 +69,6 @@ class HomeView extends StatelessWidget {
                                 ),
                               ),
                             )
-                            // InkWell(
-                            //   onTap: () {},
-                            //   child:
-                            // ),
                           ],
                         )
                       ],
@@ -90,6 +79,24 @@ class HomeView extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class RecommendedHeader extends StatelessWidget {
+  const RecommendedHeader({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "Recommended",
+      style: GoogleFonts.merriweather(
+        color: AppColors.textColor,
+        fontWeight: FontWeight.w800,
+        fontSize: 18.sp,
       ),
     );
   }
