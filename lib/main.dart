@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:machine_test/views/home_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:machine_test/views/home_view/home_view.dart';
 
-void main() {
+void main() async {
+  // Add this line
+  await ScreenUtil.ensureScreenSize();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    // systemNavigationBarColor: Colors.white, // navigation bar color
+    systemNavigationBarColor: Colors.white, // navigation bar color
     statusBarColor: Colors.transparent, // status bar color
   ));
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'BooKu',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark
-        )
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      builder: (context, child) => MaterialApp(
+        title: 'BooKu',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          // primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ),
+        ),
+        home: const HomeView(),
       ),
-      home:const HomeView()
     );
   }
 }
-
-
