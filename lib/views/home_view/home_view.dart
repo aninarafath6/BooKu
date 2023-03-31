@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machine_test/common/constants/color_constants.dart';
 import 'package:machine_test/common/constants/image_constants.dart';
+import 'package:machine_test/common/widgets/custom_icon_button.dart';
 
 import 'package:machine_test/views/home_view/widgets/bg_overlay.dart';
 
@@ -36,18 +37,12 @@ class HomeView extends StatelessWidget {
                     ),
                     centerTitle: true,
                     toolbarHeight: 60,
-                    leading: SizedBox(
-                      height: 40,
-                      child: IconButton(
-                        splashRadius: 25.w,
-                        onPressed: () => {},
-                        icon: SvgPicture.asset(
-                          AppImages.menuIcon,
-                          width: 30.w,
-                          height: 30.h,
-                        ),
-                      ),
+                    leading: const CustomIconButton(
+                      iconPATH: AppImages.menuIcon,
                     ),
+                    actions: const [
+                      CustomIconButton(iconPATH: AppImages.alertIcon)
+                    ],
                   ),
                 ],
               ),
