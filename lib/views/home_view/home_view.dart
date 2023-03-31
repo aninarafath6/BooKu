@@ -7,9 +7,11 @@ import 'package:machine_test/common/constants/color_constants.dart';
 
 //? Internal packages
 import 'package:machine_test/views/home_view/widgets/bg_overlay.dart';
+import 'package:machine_test/views/home_view/widgets/book_tile.dart';
 import 'package:machine_test/views/home_view/widgets/home_app_bar.dart';
-import 'package:machine_test/views/home_view/widgets/recommanded_header.dart';
+import 'package:machine_test/common/widgets/custom_header.dart';
 import 'package:machine_test/views/home_view/widgets/recommended_book_tile.dart';
+import 'package:machine_test/views/home_view/widgets/recommended_section.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -30,69 +32,59 @@ class HomeView extends StatelessWidget {
                   child: homeAppBar(),
                 ),
                 SizedBox(height: 16.h),
-                Column(
-                  // mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24.w),
-                      child: const RecommandedHeader(),
+                const RecommendedSection(),
+                SizedBox(height: 10.h),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Column(
+                      children: [
+                        const CustomHeader(title: "Popular Books"),
+                        SizedBox(height: 17.w),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: const [
+                                BookTile(
+                                  imagePATH:
+                                      "http://books.google.com/books/content?id=junbDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+                                  title:
+                                      "A practical, project-based guide to building real-world cross-platform mobile applications and games",
+                                  author: "Simone Alessandria",
+                                  price: "400.1",
+                                  pages: "900",
+                                  subTitle:
+                                      "An introductory guide to building cross-platform mobile applications with Flutter and Dart 2",
+                                ),
+                                BookTile(
+                                  imagePATH:
+                                      "http://books.google.com/books/content?id=pF6vDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+                                  title: "Flutter for Beginners",
+                                  author: "Alessandro Biessek",
+                                  price: "400.1",
+                                  pages: "900",
+                                  subTitle:
+                                      "An introductory guide to building cross-platform mobile applications with Flutter and Dart 2",
+                                ),
+                                BookTile(
+                                  imagePATH:
+                                      "http://books.google.com/books/content?id=zDE0EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+                                  title:
+                                      "A practical, project-based guide to building real-world cross-platform mobile applications and games",
+                                  author: "Simone Alessandria",
+                                  price: "400.1",
+                                  pages: "900",
+                                  subTitle:
+                                      "An introductory guide to building cross-platform mobile applications with Flutter and Dart 2",
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                    SizedBox(height: 17.w),
-                    Padding(
-                      padding: EdgeInsets.only(left: 24.w),
-                      child: SingleChildScrollView(
-                        physics: const PageScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          // scrollDirection: Axis.horizontal,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            RecommendedBookTile(
-                              imagePATH:
-                                  "http://books.google.com/books/content?id=I9TBDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-                              title: "Beginning App Development with Flutter",
-                              author: "Rap Payne",
-                            ),
-                            RecommendedBookTile(
-                              imagePATH:
-                                  "http://books.google.com/books/content?id=PrpJwgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-                              title: "Action in Flutter",
-                              author: "Eric Windmill",
-                            ),
-                            RecommendedBookTile(
-                              imagePATH:
-                                  "http://books.google.com/books/content?id=ex-tDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-                              title: "A Hands On Guide to App Development",
-                              author: "Marco L. Napoli",
-                            ),
-                            RecommendedBookTile(
-                              imagePATH:
-                                  "http://books.google.com/books/content?id=9rSlDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-                              title: "Flutter: Zero to App",
-                              author: "Pouya Hosseini",
-                            ),
-                            RecommendedBookTile(
-                              imagePATH:
-                                  "http://books.google.com/books/content?id=junbDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-                              title:
-                                  "A practical, project-based guide to building real-world cross-platform mobile applications and games",
-                              author: "Simone Alessandria",
-                            ),
-                            RecommendedBookTile(
-                              imagePATH:
-                                  "http://books.google.com/books/content?id=zDE0EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-                              title:
-                                  "A practical, project-based guide to building real-world cross-platform mobile applications and games",
-                              author: "Simone Alessandria",
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                )
               ],
             )
           ],
