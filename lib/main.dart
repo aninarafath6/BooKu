@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:machine_test/common/constants/color_constants.dart';
 import 'package:machine_test/views/home_view/home_view.dart';
 
 void main() async {
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(secondary: AppColors.overlayColor),
         ),
         home: const HomeView(),
       ),
