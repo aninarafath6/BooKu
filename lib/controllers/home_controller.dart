@@ -36,7 +36,6 @@ class HomeController extends GetxController with HandleException {
 
   void setBookMarked(BookItem book) async {
     if (isBookMarked(book)) {
-      // nothing do
       bookMarked.removeWhere((element) => element.id == book.id);
       _prefService.removeBookMarked(book);
     } else {
@@ -46,7 +45,10 @@ class HomeController extends GetxController with HandleException {
   }
 
   void getBookmarked() async {
-    bookMarked.value = await _prefService.getBookMarkedList() ?? [];
+    print("here");
+    Book? response = await _prefService.getBookMarkedList();
+    print(response?.items);
+    bookMarked.value = (response?.items ?? []);
   }
 
   bool isBookMarked(BookItem book) {

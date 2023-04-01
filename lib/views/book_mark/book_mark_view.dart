@@ -10,9 +10,23 @@ import 'package:machine_test/common/widgets/custom_icon_button.dart';
 import 'package:machine_test/controllers/home_controller.dart';
 import 'package:machine_test/views/home_view/widgets/book_tile.dart';
 
-class BookmarkView extends StatelessWidget {
+class BookmarkView extends StatefulWidget {
   const BookmarkView({super.key});
+
+  @override
+  State<BookmarkView> createState() => _BookmarkViewState();
+}
+
+class _BookmarkViewState extends State<BookmarkView> {
   static final HomeController _homeController = Get.put(HomeController());
+
+  @override
+  void initState() {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _homeController.getBookmarked());
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,17 +68,27 @@ class BookmarkView extends StatelessWidget {
           )
         ],
       ),
-      body: Obx(() {
-        return Padding(
-          padding: EdgeInsets.all(24.w),
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return BookTile(book: _homeController.bookMarked[index]);
-            },
-            itemCount: _homeController.bookMarked.length,
-          ),
-        );
-      }),
+      body: Obx(
+        () {
+          return _homeController.bookMarked.isEmpty
+              ? Center(
+                  child: Text(
+                    "Nothing to Display",
+                    style: GoogleFonts.mulish(fontSize: 12),
+                  ),
+                )
+              : Padding(
+                  padding: EdgeInsets.all(24.w),
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      // print(_homeController.bookMarked[index]);
+                      return BookTile(book: _homeController.bookMarked[index]);
+                    },
+                    itemCount: _homeController.bookMarked.length,
+                  ),
+                );
+        },
+      ),
     );
   }
 }

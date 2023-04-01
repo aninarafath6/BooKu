@@ -13,25 +13,26 @@ class SharedPrefService with HandleException {
   Future<void> setBookMarked(BookItem book) async {
     try {
       // * call sharedPreference
-
       SharedPreferences pref = await _prefs;
       // pref.clear();
       var check = pref.getString("book_marked");
       if (check == null) {
-        pref.setString("book_marked", jsonEncode([book.toJson()]));
-      } else {
-        List current = jsonDecode(check.toString());
-
-        List<BookItem> books = List.from(
-          current.map((e) => BookItem.fromJson(e)),
+        print("annond");
+        var encoded = jsonEncode(
+          Book(kind: "kind", totalItems: 1, items: [book]).toJson(),
         );
-        // print(current[0]);
-        books.add(book);
-        List<String> booksEncoded =
-            List.from(books.map((BookItem e) => jsonEncode(e.toJson())));
 
-        // // print(books);
-        pref.setString("book_marked", jsonEncode(booksEncoded));
+        print(encoded);
+        pref.setString("book_marked", encoded);
+      } else {
+        print("allathond");
+
+        Map<String, dynamic> current = jsonDecode(check.toString());
+
+        Book books = Book.fromJson(current);
+        books.items.add(book);
+
+        pref.setString("book_marked", jsonEncode(books.toJson()));
       }
     } catch (e) {
       log("error from set bookmark on localStorage $e");
@@ -39,29 +40,16 @@ class SharedPrefService with HandleException {
     }
   }
 
-  Future<List<BookItem>?> getBookMarkedList() async {
-    print("here");
+  Future<Book?> getBookMarkedList() async {
     try {
       SharedPreferences pref = await _prefs;
-
+      // pref.clear();
       var data = pref.getString("book_marked");
       if (data != null) {
-        List current = jsonDecode(data.toString());
-        print(current);
-        if (current.isNotEmpty) {
-          if (current.length == 1) {
-            List<BookItem> books = List.from(
-              current
-                  .map((e) => BookItem.fromJson(jsonDecode((jsonEncode(e))))),
-            );
-            return books;
-          } else {
-            List<BookItem> books = List.from(
-              current.map((e) => BookItem.fromJson(jsonDecode(((e))))),
-            );
-            return books;
-          }
-        }
+        Map<String, dynamic> current = jsonDecode(data);
+        Book book = Book.fromJson(current);
+        print("length : ${book.items.length}");
+        return book;
       }
     } catch (e) {
       handleException("Retrieving book failed");
@@ -76,35 +64,16 @@ class SharedPrefService with HandleException {
       SharedPreferences pref = await _prefs;
       // pref.clear();
       var check = pref.getString("book_marked");
-      if (check == null) {
-        pref.setString("book_marked", jsonEncode([book.toJson()]));
-      } else {
-        List current = jsonDecode(check.toString());
 
-        List<BookItem> books = List.from(
-          current.map((e) => BookItem.fromJson(e)),
-        );
-        // print(current[0]);
-        books.removeWhere((element) => element.id == book.id);
-        List<String> booksEncoded =
-            List.from(books.map((BookItem e) => jsonEncode(e.toJson())));
+      Map<String, dynamic> current = jsonDecode(check.toString());
 
-        pref.setString("book_marked", jsonEncode(booksEncoded));
-      }
+      Book books = Book.fromJson(current);
+      books.items.removeWhere((element) => element.id == book.id);
+
+      pref.setString("book_marked", jsonEncode(books.toJson()));
     } catch (e) {
-      log("error from set bookmark on localStorage $e");
-      handleException(e, message: "Something went wrong");
-    }
-  }
-
-// * clear all log state
-  Future<void> clear() async {
-    try {
-      SharedPreferences pref = await _prefs;
-
-      pref.remove("name");
-    } catch (e) {
-      handleException(e);
+      log("error from remove bookmark on localStorage $e");
+      handleException(e, message: "Remove Book Mark failed");
     }
   }
 }
