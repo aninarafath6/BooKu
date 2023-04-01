@@ -6,4 +6,5 @@ class AppColors {
   static const Color strokeColor = Color(0xffE5E4EA);
   static const Color lightText = Color(0xffAAA9B1);
   static const Color greyText = Color(0xff9C9C9C);
+  static const Color shadowColor = Color(0xff2B2D67);
 }

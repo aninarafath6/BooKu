@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+//? external packages
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+//? internal packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machine_test/common/constants/color_constants.dart';
 import 'package:machine_test/common/constants/image_constants.dart';
