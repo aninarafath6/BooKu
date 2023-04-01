@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 Book bookFromJson(String str) => Book.fromJson(json.decode(str));
 
 String bookToJson(Book data) => json.encode(data.toJson());
@@ -33,7 +35,7 @@ class Book {
       };
 }
 
-class BookItem {
+class BookItem extends Equatable {
   BookItem({
     required this.kind,
     required this.id,
@@ -54,6 +56,20 @@ class BookItem {
   final AccessInfo accessInfo;
   final SearchInfo searchInfo;
 
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        kind,
+        id,
+        etag,
+        selfLink,
+        volumeInfo,
+        saleInfo,
+        accessInfo,
+        searchInfo,
+      ];
+
+  @override
   factory BookItem.fromJson(Map<String, dynamic> json) => BookItem(
         kind: kindValues.map[json["kind"]]!,
         id: json["id"],

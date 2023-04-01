@@ -44,10 +44,14 @@ class BookTile extends StatelessWidget {
               color: Colors.transparent,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(3.r),
-                child: Image.network(
-                  book.volumeInfo.imageLinks.thumbnail,
-                  fit: BoxFit.cover,
-                  alignment: Alignment.centerLeft,
+                child: Hero(
+                  transitionOnUserGestures: true,
+                  tag: book.id,
+                  child: Image.network(
+                    book.volumeInfo.imageLinks.thumbnail,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.centerLeft,
+                  ),
                 ),
               ),
             ),

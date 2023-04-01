@@ -44,10 +44,10 @@ class RecommendedSection extends StatelessWidget {
                 itemBuilder: (context, index) {
                   ;
                   return RecommendedBookTile(
-                    book: (_homeController.recommendedBooks[index]),
+                    book: (_homeController.bookMarked[index]),
                   );
                 },
-                itemCount: _homeController.recommendedBooks.length,
+                itemCount: _homeController.bookMarked.length,
                 scrollDirection: Axis.horizontal,
               ),
             ),

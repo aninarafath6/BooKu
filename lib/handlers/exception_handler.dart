@@ -4,7 +4,11 @@ import 'package:machine_test/helpers/dialog_helper.dart';
 import 'package:machine_test/services/exception.dart';
 
 class HandleException {
-  void handleException(error, {bool top = false}) {
+  void handleException(
+    error, {
+    bool top = false,
+    message = "something went wrong!!",
+  }) {
     // print(error.message);
     if (error is BadRequestException) {
       var message = error.message;
@@ -38,7 +42,7 @@ class HandleException {
       );
     } else {
       DialogHelper.showErrorDialog(
-          description: "Something went wrong!", title: "Oops 🥸", top: top);
+          description: message.toString(), title: "Oops 🥸", top: top);
     }
   }
 }

@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 //? external packages
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //? internal packages
 import 'package:machine_test/common/constants/color_constants.dart';
 import 'package:machine_test/common/constants/image_constants.dart';
+import 'package:machine_test/controllers/home_controller.dart';
 import 'package:machine_test/models/book_model.dart';
 import 'package:machine_test/views/Individual_book_view/widgets/app_bar.dart';
 import 'package:machine_test/views/Individual_book_view/widgets/custom_chip.dart';
@@ -24,6 +26,7 @@ class IndividualBookView extends StatefulWidget {
 }
 
 class _IndividualBookViewState extends State<IndividualBookView> {
+  static final HomeController _controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     Random random = Random();
@@ -58,10 +61,14 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(3.r),
-                        child: Image.network(
-                          widget.book.volumeInfo.imageLinks.thumbnail,
-                          fit: BoxFit.contain,
-                          alignment: Alignment.centerLeft,
+                        child: Hero(
+                          transitionOnUserGestures: true,
+                          tag: widget.book.id,
+                          child: Image.network(
+                            widget.book.volumeInfo.imageLinks.thumbnail,
+                            fit: BoxFit.contain,
+                            alignment: Alignment.centerLeft,
+                          ),
                         ),
                       ),
                     ),
@@ -82,7 +89,8 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                       ),
                       Expanded(
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              _controller.setBookMarked(widget.book),
                           icon: SvgPicture.asset(
                             'assets/svgs/book_mark_ns.svg',
                             // ignore: deprecated_member_use
@@ -120,9 +128,8 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                             ? "E-Book"
                             : "Hard Copy",
                       ),
-                      CustomChip(
-                        label: widget.book.volumeInfo.categories?[0] ??
-                            "Computers",
+                      const CustomChip(
+                        label: "Computers",
                       ),
                       CustomChip(label: widget.book.saleInfo.country.name),
                     ],
