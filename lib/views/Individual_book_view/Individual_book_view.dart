@@ -16,6 +16,7 @@ import 'package:machine_test/views/Individual_book_view/widgets/app_bar.dart';
 import 'package:machine_test/views/Individual_book_view/widgets/custom_chip.dart';
 import 'package:machine_test/views/Individual_book_view/widgets/detail_ta.dart';
 import 'package:machine_test/views/home_view/widgets/recommended_section.dart';
+import 'package:remixicon/remixicon.dart';
 
 class IndividualBookView extends StatefulWidget {
   const IndividualBookView({super.key, required this.book});
@@ -88,15 +89,21 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                         ),
                       ),
                       Expanded(
-                        child: IconButton(
-                          onPressed: () =>
-                              _controller.setBookMarked(widget.book),
-                          icon: SvgPicture.asset(
-                            'assets/svgs/book_mark_ns.svg',
-                            // ignore: deprecated_member_use
-                            color: AppColors.textColor,
-                          ),
-                        ),
+                        child: Obx(() {
+                          return IconButton(
+                            tooltip: "Book Mark",
+                            onPressed: () =>
+                                _controller.setBookMarked(widget.book),
+                            icon: Icon(
+                              _controller.isBookMarked(widget.book)
+                                  ? Remix.bookmark_fill
+                                  : Remix.bookmark_line,
+                              color: _controller.isBookMarked(widget.book)
+                                  ? Colors.yellow[600]
+                                  : AppColors.textColor,
+                            ),
+                          );
+                        }),
                       )
                     ],
                   ),

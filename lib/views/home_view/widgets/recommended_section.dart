@@ -8,8 +8,6 @@ import 'package:get/get_core/src/get_main.dart';
 //?? internal packages
 import 'package:machine_test/common/widgets/custom_header.dart';
 import 'package:machine_test/controllers/home_controller.dart';
-import 'package:machine_test/models/book_model.dart';
-import 'package:machine_test/utils/shuffle.dart';
 import 'package:machine_test/views/home_view/widgets/recommended_book_tile.dart';
 
 class RecommendedSection extends StatelessWidget {

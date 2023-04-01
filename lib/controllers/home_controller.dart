@@ -35,24 +35,23 @@ class HomeController extends GetxController with HandleException {
   }
 
   void setBookMarked(BookItem book) async {
-    var b = bookMarked.where((bk) => bk.id == book.id).toList().isEmpty
-        ? false
-        : true;
-    print(b);
-    if (b) {
+    if (isBookMarked(book)) {
       // nothing do
-      print("Already Exists");
+      bookMarked.removeWhere((element) => element.id == book.id);
+      _prefService.removeBookMarked(book);
     } else {
-      print("added now");
-
       await _prefService.setBookMarked(book);
       bookMarked.add(book);
-      print("Not contains");
     }
-    print("a $a");
   }
 
   void getBookmarked() async {
     bookMarked.value = await _prefService.getBookMarkedList() ?? [];
+  }
+
+  bool isBookMarked(BookItem book) {
+    return bookMarked.where((bk) => bk.id == book.id).toList().isEmpty
+        ? false
+        : true;
   }
 }

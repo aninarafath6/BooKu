@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
-                    child: homeAppBar(),
+                    child: homeAppBar(context),
                   ),
                   Expanded(
                     child: NestedScrollView(

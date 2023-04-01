@@ -35,7 +35,7 @@ class SharedPrefService with HandleException {
       }
     } catch (e) {
       log("error from set bookmark on localStorage $e");
-      handleException(e, message: e);
+      handleException(e, message: "Book Mark failed");
     }
   }
 
@@ -67,6 +67,34 @@ class SharedPrefService with HandleException {
       handleException("Retrieving book failed");
     }
     return null;
+  }
+
+  void removeBookMarked(BookItem book) async {
+    try {
+      // * call sharedPreference
+
+      SharedPreferences pref = await _prefs;
+      // pref.clear();
+      var check = pref.getString("book_marked");
+      if (check == null) {
+        pref.setString("book_marked", jsonEncode([book.toJson()]));
+      } else {
+        List current = jsonDecode(check.toString());
+
+        List<BookItem> books = List.from(
+          current.map((e) => BookItem.fromJson(e)),
+        );
+        // print(current[0]);
+        books.removeWhere((element) => element.id == book.id);
+        List<String> booksEncoded =
+            List.from(books.map((BookItem e) => jsonEncode(e.toJson())));
+
+        pref.setString("book_marked", jsonEncode(booksEncoded));
+      }
+    } catch (e) {
+      log("error from set bookmark on localStorage $e");
+      handleException(e, message: "Something went wrong");
+    }
   }
 
 // * clear all log state
