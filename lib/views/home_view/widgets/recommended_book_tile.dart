@@ -25,7 +25,9 @@ class RecommendedBookTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const IndividualBookView()));
+              builder: (context) => IndividualBookView(
+                    book: book,
+                  )));
         },
         child: Padding(
           padding: EdgeInsets.all(4.w),

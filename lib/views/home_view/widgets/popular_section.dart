@@ -29,6 +29,7 @@ class PopularSection extends StatelessWidget {
           Obx(() {
             return Expanded(
               child: ListView.builder(
+                padding: EdgeInsets.zero,
                 itemBuilder: (context, index) {
                   _homeController.books;
                   return BookTile(

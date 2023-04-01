@@ -30,7 +30,9 @@ class BookTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(3.r),
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const IndividualBookView()));
+              builder: (context) => IndividualBookView(
+                    book: book,
+                  )));
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

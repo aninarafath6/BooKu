@@ -9,13 +9,15 @@ import 'package:google_fonts/google_fonts.dart';
 //? internal packages
 import 'package:machine_test/common/constants/color_constants.dart';
 import 'package:machine_test/common/constants/image_constants.dart';
+import 'package:machine_test/models/book_model.dart';
 import 'package:machine_test/views/Individual_book_view/widgets/app_bar.dart';
 import 'package:machine_test/views/Individual_book_view/widgets/custom_chip.dart';
 import 'package:machine_test/views/Individual_book_view/widgets/detail_ta.dart';
 import 'package:machine_test/views/home_view/widgets/recommended_section.dart';
 
 class IndividualBookView extends StatefulWidget {
-  const IndividualBookView({super.key});
+  const IndividualBookView({super.key, required this.book});
+  final BookItem book;
 
   @override
   State<IndividualBookView> createState() => _IndividualBookViewState();
@@ -57,7 +59,7 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(3.r),
                         child: Image.network(
-                          "https://open.umn.edu/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbFFMIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c67a551af4cd590532f0955ea5dcf02c6904c047/T353650-Deleting-Dystopia-Book-Cover-683x1024.png",
+                          widget.book.volumeInfo.imageLinks.thumbnail,
                           fit: BoxFit.contain,
                           alignment: Alignment.centerLeft,
                         ),
@@ -70,7 +72,7 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                       Expanded(
                         flex: 3,
                         child: Text(
-                          "Flutter Complete Reference",
+                          widget.book.volumeInfo.title,
                           style: GoogleFonts.merriweather(
                             color: AppColors.textColor,
                             fontWeight: FontWeight.w800,
@@ -112,21 +114,39 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                   ),
                   SizedBox(height: 8.w),
                   Wrap(
-                    children: const [
-                      CustomChip(label: "E-Book"),
-                      CustomChip(label: "Computers"),
-                      CustomChip(label: "Not Mature"),
+                    children: [
+                      CustomChip(
+                        label: widget.book.saleInfo.isEbook
+                            ? "E-Book"
+                            : "Hard Copy",
+                      ),
+                      CustomChip(
+                        label: widget.book.volumeInfo.categories?[0] ??
+                            "Computers",
+                      ),
+                      CustomChip(label: widget.book.saleInfo.country.name),
                     ],
                   ),
                   SizedBox(height: 15.w),
-                  Wrap(
-                    children: const [
-                      DetailTa(title: "Language", value: "English"),
-                      DetailTa(title: "Author", value: "Rap Payne"),
-                      DetailTa(title: "Publisher ", value: "Apress"),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        DetailTa(
+                            title: "Language",
+                            value: widget.book.volumeInfo.language.name),
+                        DetailTa(
+                            title: "Author",
+                            value: widget.book.volumeInfo.authors[0]),
+                        DetailTa(
+                          title: "Publisher ",
+                          value: widget.book.volumeInfo.publisher ??
+                              "Arthur Samual",
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 20.w),
+                  SizedBox(height: 25.w),
                   Text(
                     "Description",
                     style: GoogleFonts.merriweather(
@@ -139,7 +159,7 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                   Wrap(
                     children: [
                       Text(
-                        "Create iOS and Android apps with Flutter using just one codebase. App development on multiple platforms has historically been difficult and complex. This book breaks down complex concepts and tasks into easily digestible segments with examples, pictures, and hands-on labs with starters and solutions. In doing so, you'll develop a basic understanding of the Dart programming language; the entire Flutter development toolchain; the differences between stateful and stateless widgets; and a working knowledge of the architecture of apps. All the most important parts of app development with Flutter are covered in this book. Work with themes and styles. Develop custom widgets. Teach your app to respond to gestures like taps, swipes, and pinches. Design, create and control the layout of your app. Create tools to handle form data entry from users. And ultimately create killer multiscreen apps with navigation, menus, and tabs. Flutter is Google's new framework for creating mobile apps that run on iOS and Android phones both.You had to be a super-developer to write apps for iOS or Android alone. But writing for both? Forget about it! You had to be familiar with Swift, Java/Kotlin, Xcode, Eclipse, and a bunch of other technologies simultaneously. Beginning App Development with Flutter simplifies the entire process. What You'll Learn Get the most out of great Flutter widgets Create custom widgets, both stateless and statefulExercise expert control over your Flutter layoutsMake your app respond to gestures like swiping, pinching and tappingInitiate async Ajax calls to RESTful APIs — including Google Firebase! Who This Book Is ForDevelopers who have coded in Java, C#, C++, or any similar language. It brings app development within the reach of younger developers, so STEM groups are likely to pick up the technology. Managers, product owners, and business analysts need to understand Flutter's capabilities.",
+                        widget.book.volumeInfo.description,
                         maxLines: readMore == true ? 100 : 15,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.mulish(
