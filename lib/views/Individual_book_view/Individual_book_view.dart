@@ -6,6 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machine_test/common/constants/color_constants.dart';
 import 'package:machine_test/common/constants/image_constants.dart';
+import 'package:machine_test/views/Individual_book_view/widgets/app_bar.dart';
+import 'package:machine_test/views/Individual_book_view/widgets/custom_chip.dart';
+import 'package:machine_test/views/Individual_book_view/widgets/detail_ta.dart';
 
 class IndividualBookView extends StatelessWidget {
   const IndividualBookView({super.key});
@@ -14,7 +17,6 @@ class IndividualBookView extends StatelessWidget {
   Widget build(BuildContext context) {
     Random random = Random();
     double rating = random.nextDouble() * 10;
-    int reviews = random.nextInt(4000);
 
     return Scaffold(
       appBar: IndividualAppBar(context),
@@ -98,47 +100,18 @@ class IndividualBookView extends StatelessWidget {
               ),
               SizedBox(height: 15.w),
               Wrap(
-                children: [
-                  Chip(
-                    label: Text(
-                      "E-Book",
-                      style: GoogleFonts.mulish(color: const Color(0xff88A4E8)),
-                    ),
-                    backgroundColor: Color(0xffDBE3FF),
-                  ),
-                  SizedBox(width: 10.w),
-                  Chip(
-                    label: Text(
-                      "Computer",
-                      style: GoogleFonts.mulish(color: const Color(0xff88A4E8)),
-                    ),
-                    backgroundColor: Color(0xffDBE3FF),
-                  ),
-                  SizedBox(width: 10.w),
-                  Chip(
-                    label: Text(
-                      "Not Mature",
-                      style: GoogleFonts.mulish(color: const Color(0xff88A4E8)),
-                    ),
-                    backgroundColor: Color(0xffDBE3FF),
-                  ),
+                children: const [
+                  CustomChip(label: "E-Book"),
+                  CustomChip(label: "Computers"),
+                  CustomChip(label: "Not Mature"),
                 ],
               ),
               SizedBox(height: 15.w),
               Wrap(
                 children: const [
-                  DetailTa(
-                    title: "Language",
-                    value: "English",
-                  ),
-                  DetailTa(
-                    title: "Author",
-                    value: "Rap Payne",
-                  ),
-                  DetailTa(
-                    title: "Publisher ",
-                    value: "Apress",
-                  ),
+                  DetailTa(title: "Language", value: "English"),
+                  DetailTa(title: "Author", value: "Rap Payne"),
+                  DetailTa(title: "Publisher ", value: "Apress"),
                 ],
               ),
               SizedBox(height: 20.w),
@@ -164,75 +137,6 @@ class IndividualBookView extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  AppBar IndividualAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      leading: IconButton(
-        onPressed: () => Navigator.pop(context),
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
-      ),
-      actions: [
-        IconButton(
-          splashRadius: 25,
-          onPressed: () => {},
-          icon: const Icon(
-            Icons.more_horiz,
-            color: Colors.black,
-          ),
-        ),
-        SizedBox(
-          width: 15.w,
-        )
-      ],
-    );
-  }
-}
-
-class DetailTa extends StatelessWidget {
-  const DetailTa({
-    super.key,
-    required this.title,
-    required this.value,
-  });
-
-  final String title;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 40.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.mulish(
-              fontWeight: FontWeight.normal,
-              color: AppColors.lightText,
-              fontSize: 14.sp,
-            ),
-          ),
-          SizedBox(height: 3.w),
-          Text(
-            value,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.mulish(
-              fontWeight: FontWeight.w500,
-              color: AppColors.textColor,
-              fontSize: 14.sp,
-            ),
-          ),
-        ],
       ),
     );
   }
