@@ -6,19 +6,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //? internal packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machine_test/common/constants/color_constants.dart';
+import 'package:machine_test/models/book_model.dart';
 import 'package:machine_test/views/Individual_book_view/Individual_book_view.dart';
 
 class RecommendedBookTile extends StatelessWidget {
   const RecommendedBookTile({
     super.key,
-    required this.title,
-    required this.author,
-    required this.imagePATH,
+    required this.book,
   });
-
-  final String title;
-  final String author;
-  final String imagePATH;
+  final BookItem book;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +43,7 @@ class RecommendedBookTile extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.r),
                   child: Image.network(
-                    imagePATH,
+                    book.volumeInfo.imageLinks.thumbnail,
                     fit: BoxFit.cover,
                     alignment: Alignment.centerLeft,
                   ),
@@ -55,7 +51,7 @@ class RecommendedBookTile extends StatelessWidget {
               ),
               SizedBox(height: 12.h),
               Text(
-                title,
+                book.volumeInfo.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.mulish(
@@ -63,7 +59,7 @@ class RecommendedBookTile extends StatelessWidget {
               ),
               SizedBox(height: 6.h),
               Text(
-                "- $author",
+                "- ${book.volumeInfo.authors[0]}",
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.mulish(
                   fontWeight: FontWeight.normal,

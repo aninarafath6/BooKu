@@ -17,12 +17,13 @@ class Book {
 
   final String kind;
   final int totalItems;
-  final List<Item> items;
+  final List<BookItem> items;
 
   factory Book.fromJson(Map<String, dynamic> json) => Book(
         kind: json["kind"],
         totalItems: json["totalItems"],
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        items:
+            List<BookItem>.from(json["items"].map((x) => BookItem.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,8 +33,8 @@ class Book {
       };
 }
 
-class Item {
-  Item({
+class BookItem {
+  BookItem({
     required this.kind,
     required this.id,
     required this.etag,
@@ -53,7 +54,7 @@ class Item {
   final AccessInfo accessInfo;
   final SearchInfo searchInfo;
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory BookItem.fromJson(Map<String, dynamic> json) => BookItem(
         kind: kindValues.map[json["kind"]]!,
         id: json["id"],
         etag: json["etag"],

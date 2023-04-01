@@ -57,7 +57,7 @@ class _IndividualBookViewState extends State<IndividualBookView> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(3.r),
                         child: Image.network(
-                          "http://books.google.com/books/content?id=ex-tDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                          "https://open.umn.edu/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbFFMIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c67a551af4cd590532f0955ea5dcf02c6904c047/T353650-Deleting-Dystopia-Book-Cover-683x1024.png",
                           fit: BoxFit.contain,
                           alignment: Alignment.centerLeft,
                         ),
