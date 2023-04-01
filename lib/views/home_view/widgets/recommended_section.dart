@@ -10,7 +10,9 @@ import 'package:machine_test/views/home_view/widgets/recommended_book_tile.dart'
 class RecommendedSection extends StatelessWidget {
   const RecommendedSection({
     super.key,
+    this.title = 'Recommended',
   });
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,8 @@ class RecommendedSection extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: const CustomHeader(
-            title: "Recommended",
+          child: CustomHeader(
+            title: title,
           ),
         ),
         SizedBox(height: 17.w),
