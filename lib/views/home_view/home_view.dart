@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 //? external packages
@@ -35,6 +36,8 @@ class HomeView extends StatelessWidget {
                   ),
                   Expanded(
                     child: NestedScrollView(
+                      physics: const PageScrollPhysics(),
+                      dragStartBehavior: DragStartBehavior.down,
                       body: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: Column(
