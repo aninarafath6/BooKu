@@ -13,7 +13,7 @@ class BgOverlay extends StatelessWidget {
         Expanded(
           child: Container(
             decoration:
-                BoxDecoration(color: AppColors.strokeColor.withOpacity(.3)),
+                BoxDecoration(color: AppColors.strokeColor.withOpacity(.6)),
           ),
         ),
         Expanded(

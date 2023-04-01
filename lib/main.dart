@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/route_manager.dart';
 import 'package:machine_test/common/constants/color_constants.dart';
 import 'package:machine_test/views/home_view/home_view.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      builder: (context, child) => MaterialApp(
+      builder: (context, child) => GetMaterialApp(
         title: 'BooKu',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

@@ -10,25 +10,15 @@ import 'package:google_fonts/google_fonts.dart';
 //?? internal packages
 import 'package:machine_test/common/constants/color_constants.dart';
 import 'package:machine_test/common/constants/image_constants.dart';
+import 'package:machine_test/models/book_model.dart';
 import 'package:machine_test/views/Individual_book_view/Individual_book_view.dart';
 
 class BookTile extends StatelessWidget {
   const BookTile({
     super.key,
-    required this.title,
-    required this.author,
-    required this.imagePATH,
-    required this.subTitle,
-    required this.price,
-    required this.pages,
+    required this.book,
   });
-
-  final String title;
-  final String author;
-  final String imagePATH;
-  final String subTitle;
-  final String price;
-  final String pages;
+  final BookItem book;
   @override
   Widget build(BuildContext context) {
     Random random = Random();
@@ -40,7 +30,9 @@ class BookTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(3.r),
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const IndividualBookView()));
+              builder: (context) => IndividualBookView(
+                    book: book,
+                  )));
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,10 +44,14 @@ class BookTile extends StatelessWidget {
               color: Colors.transparent,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(3.r),
-                child: Image.network(
-                  imagePATH,
-                  fit: BoxFit.cover,
-                  alignment: Alignment.centerLeft,
+                child: Hero(
+                  transitionOnUserGestures: true,
+                  tag: book.id,
+                  child: Image.network(
+                    book.volumeInfo.imageLinks.thumbnail,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.centerLeft,
+                  ),
                 ),
               ),
             ),
@@ -66,7 +62,7 @@ class BookTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    book.volumeInfo.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.mulish(
@@ -76,7 +72,7 @@ class BookTile extends StatelessWidget {
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    subTitle,
+                    book.volumeInfo.subtitle ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.mulish(
@@ -86,7 +82,7 @@ class BookTile extends StatelessWidget {
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    "by $author",
+                    "by ${book.volumeInfo.authors[0]}",
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.mulish(
                       fontWeight: FontWeight.normal,
