@@ -9,12 +9,18 @@ class HomeController extends GetxController with HandleException {
   final BaseClient _baseClient = BaseClient(baseURL: Network.baseURL);
 
   var books = [].obs;
+  var recommendedBooks = [].obs;
+  var popularBooks = [].obs;
+
   var a = "10".obs;
 
   void getBooks() async {
     String data = await _baseClient.get(Network.endPoint);
     Book rawData = bookFromJson(data);
     books.value = shuffleFunc<BookItem>(rawData.items);
+    int half = books.length ~/ 2;
+    recommendedBooks.value = books.value.sublist(0, half);
+    popularBooks.value = books.value.sublist(half, books.value.length);
   }
 
   @override
