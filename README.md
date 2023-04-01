@@ -17,15 +17,54 @@ A new Flutter project.
 
 
 
+### Libraries used
+🌲
+1. [Flutter](https://flutter.dev/)
+2. [dart](https://dart.dev/) basic language
+3. [Getx](https://pub.dev/packages/get/) for state management
+4. [Http](https://pub.dev/packages/http) for making http request
+5. [Lottie](https://pub.dev/packages/lottie) for animations
+6. [remixicon](https://pub.dev/packages/flutter_remix) icon pack
+7. [Shared Preference](https://pub.dev/packages/shared_preferences) local storage
 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### Tools used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. [flutter_lint](https://pub.dev/packages/flutter_lints/) for lint
+2. [Google_fonts](https://pub.dev/packages/google_fonts/) for typography
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Preferred tools
+
+1. Code editor [VS Code](https://code.visualstudio.com/)
+
+### Folder structure
+
+followed MVC architecture
+
+#### `utils`
+
+It will have all the basic utilities dimension,navigation etc...
+
+#### `common`
+
+It will have all the constants and common things like constants , themes , routes ... etc
+
+#### `helpers`
+
+It will have all the basic helper functions of app like dailog helper  etc.
+
+#### `assets`
+
+It will contains all the assets is used in this project.
+
+### Commands
+
+```
+# start dev
+flutter run
+
+# test app
+flutter test [<DIRECTORY|DART_FILE>]
+
+```
